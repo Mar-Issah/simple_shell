@@ -2,7 +2,7 @@
 
 /**
  * signal_handler - handle the process interrept signal
- * @signo: the signal identifier
+ * @sig: the signal identifier
  *
  * Return: void
  */
@@ -23,6 +23,7 @@ void signal_handler(int sig)
 char *_getenv(char *path_name)
 {
 	char **environ_cursor, *env_ptr, *name_ptr;
+	
 	environ_cursor = environ;
 
 	while (*environ_cursor)
