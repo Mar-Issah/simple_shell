@@ -58,7 +58,7 @@ int process_command(shell_info *data)
 	{
 		signal(SIGINT, SIG_DFL);
 		if (execve(data->command, data->args, environ) < 0)
-		data->error_msg = _strdup("not found\n");
+		data->error_message = _strdup("not found\n");
 			return (FAIL_CODE);
 	}
 	else

@@ -83,7 +83,7 @@ int print_error(shell_info *data)
 	PRINT(": ");
 	PRINT(data->args[0]);
 	PRINT(": ");
-	PRINT(data->error_msg);
+	PRINT(data->error_message);
 	free(idx);
 	return (0);
 }

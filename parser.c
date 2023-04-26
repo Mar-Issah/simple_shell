@@ -65,7 +65,7 @@ int is_builtin(shell_info *data)
 
 	while ((blt + count)->command)
 	{
-		if (_strcmp(data->args[0], (blt + i)->command) == 0)
+		if (_strcmp(data->args[0], (blt + count)->command) == 0)
 			return (SUCCESS_CODE);
 		count++;
 	}

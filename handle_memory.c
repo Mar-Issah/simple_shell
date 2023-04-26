@@ -53,38 +53,38 @@ char *_memset(char *s, char byt, unsigned int n)
 	return (s);
 }
 /**
- * free_data - frees data
+ * free_space - frees data
  * @data: the data structure
  *
  * Return: Succes code
  */
-int free_data(shell_info *data)
+int free_space(shell_info *data)
 {
-	free(data->line);
-	data->line = NULL;
 	free(data->args);
 	data->args = NULL;
+	free(data->line);
+	data->line = NULL;
 	free(data->command);
 	data->command = NULL;
-	free(data->error_msg);
-	data->error_msg = NULL;
+	free(data->error_message);
+	data->error_message = NULL;
 	return (0);
 }
 /**
  * _memcpy - cpies memory area
- * @dest: Destination memory area
- * @src: Source memory area
- * @n: Amount of memory byte
+ * @destination: Destination
+ * @src: Source memory
+ * @n: Amount of memory
  *
  * Return: A pointer to dest
  */
-char *_memcpy(char *dest, char *src, unsigned int n)
+char *_memcpy(char *destination, char *src, unsigned int n)
 {
-	unsigned int i;
+	unsigned int j;
 
-	for (i = 0; i < n; i++)
+	for (j = 0; j < n; j++)
 	{
-		dest[i] = src[i];
+		destination[j] = src[j];
 	}
-	return (dest);
+	return (destination);
 }

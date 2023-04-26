@@ -23,13 +23,13 @@ int main(void)
 		}
 		if (split_command(&data) < 0)
 		{
-			free_data(&data);
+			free_space(&data);
 			continue;
 		}
 		pl = parse_command(&data);
 		if (pl == 0)
 		{
-			free_data(&data);
+			free_space(&data);
 			continue;
 		}
 		if (pl < 0)
@@ -42,8 +42,8 @@ int main(void)
 			print_error(&data);
 			break;
 		}
-		free_data(&data);
+		free_space(&data);
 	}
-	free_data(&data);
+	free_space(&data);
 	exit(EXIT_SUCCESS);
 }

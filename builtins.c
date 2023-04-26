@@ -59,8 +59,8 @@ int handle_builtin(shell_info *input)
 
 	while ((blt + count)->command)
 	{
-		if (_strcmp(input->args[0], (blt + i)->command) == 0)
-			return ((blt + count)->f(data));
+		if (_strcmp(input->args[0], (blt + count)->command) == 0)
+			return ((blt + count)->f(input));
 		count++;
 	}
 	return (FAIL_CODE);
@@ -76,19 +76,19 @@ int abort_program(shell_info *input __attribute__((unused)))
 
 	if (input->args[1] == NULL)
 	{
-		free_data(input);
+		free_space(input);
 		exit(errno);
 	}
 	while (input->args[1][i])
 	{
 		if (_isalphabet(input->args[1][i++]) < 0)
 		{
-			input->error_msg = _strdup("Illegal number\n");
+			input->error_message = _strdup("Illegal number\n");
 			return (FAIL_CODE);
 		}
 	}
 	code = _atoi(input->args[1]);
-	free_data(input);
+	free_space(input);
 	exit(code);
 }
 

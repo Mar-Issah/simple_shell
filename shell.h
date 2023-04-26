@@ -31,7 +31,7 @@ typedef struct shell_data
 	char *line;
 	char **args;
 	char *command;
-	char *error_msg;
+	char *error_message;
 	char *oldpwd;
 	unsigned long int index;
 	char *env;
@@ -61,7 +61,7 @@ typedef struct builtin
 void *_realloc(void *ptr, unsigned int old_size, unsigned int updated_size);
 char *_memset(char *s, char byt, unsigned int n);
 char *_memcpy(char *dest, char *src, unsigned int n);
-int free_data(shell_info *);
+int free_space(shell_info *);
 
 
 void *fill_an_array(void *a, int el, unsigned int len);
