@@ -19,7 +19,7 @@
 #define BUFSIZE 256
 #define TOKENSIZE 64
 #define SETOWD(V) (V = _strdup(_getenv("OLDPWD")))
-#define PRINT(c) (write(STDOUT_FILENO, c, _strlen(c)))
+#define LOG(c) (write(STDOUT_FILENO, c, _strlen(c)))
 #define PROMPT "$ "
 
 

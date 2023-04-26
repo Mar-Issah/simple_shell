@@ -14,7 +14,7 @@ int read_command(shell_info *data)
 	if (data->line == NULL)
 		return (FAIL_CODE);
 	if (isatty(STDIN_FILENO))
-		PRINT(PROMPT);
+		LOG(PROMPT);
 	for (csr_ptr = data->line, end_ptr = data->line + size;;)
 	{
 		read_st = read(STDIN_FILENO, &c, 1);

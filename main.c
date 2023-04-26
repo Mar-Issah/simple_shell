@@ -17,7 +17,7 @@ int main(void)
 		if (read_command(&data) < 0)
 		{
 			if (isatty(STDIN_FILENO))
-				PRINT("\n");
+				LOG("\n");
 			break;
 		}
 		if (split_command(&data) < 0)

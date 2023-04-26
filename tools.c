@@ -10,8 +10,8 @@ void signal_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		PRINT("\n");
-		PRINT(PROMPT);
+		LOG("\n");
+		LOG(PROMPT);
 	}
 }
 /**

@@ -80,12 +80,12 @@ int print_error(shell_info *data)
 {
 	char *idx = _itoa(data->index);
 
-	PRINT("hsh: ");
-	PRINT(idx);
-	PRINT(": ");
-	PRINT(data->args[0]);
-	PRINT(": ");
-	PRINT(data->error_message);
+	LOG("hsh: ");
+	LOG(idx);
+	LOG(": ");
+	LOG(data->args[0]);
+	LOG(": ");
+	LOG(data->error_message);
 	free(idx);
 	return (0);
 }
