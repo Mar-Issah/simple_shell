@@ -57,9 +57,9 @@ char *_memset(char *s, char byt, unsigned int n)
  * @data: the data structure
  *
  * Return: (Success) positive number
- * ------- (Fail) negative number
+ * ------- (FAIL_CODE) negative number
  */
-int free_data(sh_t *data)
+int free_data(shell_info *data)
 {
 	free(data->line);
 	data->line = NULL;

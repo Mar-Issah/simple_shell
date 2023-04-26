@@ -73,9 +73,9 @@ int intlen(int num)
  * @data: the data structure pointer
  *
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * ------- (FAIL_CODE) a negative number
  */
-int print_error(sh_t *data)
+int print_error(shell_info *data)
 {
 	char *idx = _itoa(data->index);
 
@@ -94,9 +94,9 @@ int print_error(sh_t *data)
  * @data: the data structure pointer
  *
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * ------- (FAIL_CODE) a negative number
  */
-int write_history(sh_t *data __attribute__((unused)))
+int write_history(shell_info *data __attribute__((unused)))
 {
 	char *filename = "history";
 	char *line_of_history = "this is a line of history";

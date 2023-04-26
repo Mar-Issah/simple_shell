@@ -4,16 +4,16 @@
  * @data: the data strucct pointer
  *
  * Return: (Success)
- * ------- (Fail) otherwise
+ * ------- (FAIL_CODE) otherwise
  */
-int is_path_form(sh_t *data)
+int is_path_form(shell_info *data)
 {
 	if (_strchr(data->args[0], '/') != 0)
 	{
 		data->cmd = _strdup(data->args[0]);
-		return (SUCCESS);
+		return (SUCCESS_CODE);
 	}
-	return (FAIL);
+	return (FAIL_CODE);
 }
 #define DELIMITER ":"
 /**
@@ -21,9 +21,9 @@ int is_path_form(sh_t *data)
  * @data: the data strucct pointer
  *
  * Return: (Success)
- * ------- (Fail) otherwise
+ * ------- (FAIL_CODE) otherwise
  */
-void is_short_form(sh_t *data)
+void is_short_form(shell_info *data)
 {
 	char *path, *token, *_path;
 	struct stat st;
@@ -55,11 +55,11 @@ void is_short_form(sh_t *data)
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * ------- (FAIL_CODE) negative number will returned
  */
-int is_builtin(sh_t *data)
+int is_builtin(shell_info *data)
 {
-	blt_t blt[] = {
+	built_in blt[] = {
 		{"exit", abort_prg},
 		{"cd", change_dir},
 		{"help", display_help},
@@ -70,8 +70,8 @@ int is_builtin(sh_t *data)
 	while ((blt + i)->cmd)
 	{
 		if (_strcmp(data->args[0], (blt + i)->cmd) == 0)
-			return (SUCCESS);
+			return (SUCCESS_CODE);
 		i++;
 	}
-	return (NEUTRAL);
+	return (NEUTRAL_CODE);
 }

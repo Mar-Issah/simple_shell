@@ -4,11 +4,11 @@
  * main - the main function
  *
  * Return: (Success) 0 always
- * ------- (Fail) we drop out the looser :)
+ * ------- (FAIL_CODE) we drop out the looser :)
  */
 int main(void)
 {
-	sh_t data;
+	shell_info data;
 	int pl;
 
 	_memset((void *)&data, 0, sizeof(data));
@@ -54,28 +54,28 @@ int main(void)
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * ------- (FAIL_CODE) a negative number
  */
-int read_line(sh_t *data)
+int read_line(shell_info *data)
 {
 	char *csr_ptr, *end_ptr, c;
 	size_t size = BUFSIZE, read_st, length, new_size;
 
 	data->line = malloc(size * sizeof(char));
 	if (data->line == NULL)
-		return (FAIL);
+		return (FAIL_CODE);
 	if (isatty(STDIN_FILENO))
 		PRINT(PROMPT);
 	for (csr_ptr = data->line, end_ptr = data->line + size;;)
 	{
 		read_st = read(STDIN_FILENO, &c, 1);
 		if (read_st == 0)
-			return (FAIL);
+			return (FAIL_CODE);
 		*csr_ptr++ = c;
 		if (c == '\n')
 		{
 			*csr_ptr = '\0';
-			return (SUCCESS);
+			return (SUCCESS_CODE);
 		}
 		if (csr_ptr + 2 >= end_ptr)
 		{
@@ -84,7 +84,7 @@ int read_line(sh_t *data)
 			data->line = _realloc(data->line, size * sizeof(char),
 						new_size * sizeof(char));
 			if (data->line == NULL)
-				return (FAIL);
+				return (FAIL_CODE);
 			size = new_size;
 			end_ptr = data->line + size;
 			csr_ptr = data->line + length;
@@ -97,21 +97,21 @@ int read_line(sh_t *data)
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * ------- (FAIL_CODE) a negative number
  */
-int split_line(sh_t *data)
+int split_line(shell_info *data)
 {
 	char *token;
 	size_t size = TOKENSIZE, new_size, i = 0;
 
 	if (_strcmp(data->line, "\n") == 0)
-		return (FAIL);
+		return (FAIL_CODE);
 	data->args = malloc(size * sizeof(char *));
 	if (data->args == NULL)
-		return (FAIL);
+		return (FAIL_CODE);
 	token = strtok(data->line, DELIMITER);
 	if (token == NULL)
-		return (FAIL);
+		return (FAIL_CODE);
 	while (token)
 	{
 		data->args[i++] =  token;
@@ -121,7 +121,7 @@ int split_line(sh_t *data)
 			data->args = _realloc(data->args, size * sizeof(char *),
 					new_size * sizeof(char *));
 			if (data->args == NULL)
-				return (FAIL);
+				return (FAIL_CODE);
 			size = new_size;
 		}
 		token = strtok(NULL, DELIMITER);
@@ -136,20 +136,20 @@ int split_line(sh_t *data)
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * ------- (FAIL_CODE) a negative number
  */
-int parse_line(sh_t *data)
+int parse_line(shell_info *data)
 {
 	if (is_path_form(data) > 0)
-		return (SUCCESS);
+		return (SUCCESS_CODE);
 	if (is_builtin(data) > 0)
 	{
 		if (handle_builtin(data) < 0)
-			return (FAIL);
-		return (NEUTRAL);
+			return (FAIL_CODE);
+		return (NEUTRAL_CODE);
 	}
 	is_short_form(data);
-	return (SUCCESS);
+	return (SUCCESS_CODE);
 }
 #undef DELIMITER
 /**
@@ -157,9 +157,9 @@ int parse_line(sh_t *data)
  * @data: a pointer to the struct of data
  *
  * Return: (Success) a positive number
- * ------- (Fail) a negative number
+ * ------- (FAIL_CODE) a negative number
  */
-int process_cmd(sh_t *data)
+int process_cmd(shell_info *data)
 {
 	pid_t pid;
 	int status;
@@ -170,7 +170,7 @@ int process_cmd(sh_t *data)
 		signal(SIGINT, SIG_DFL);
 		if (execve(data->cmd, data->args, environ) < 0)
 		data->error_msg = _strdup("not found\n");
-			return (FAIL);
+			return (FAIL_CODE);
 	}
 	else
 	{

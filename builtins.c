@@ -6,9 +6,9 @@
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * ------- (FAIL_CODE) negative number will returned
  */
-int change_dir(sh_t *data)
+int change_dir(shell_info *data)
 {
 	char *home;
 
@@ -17,8 +17,8 @@ int change_dir(sh_t *data)
 	{
 		SETOWD(data->oldpwd);
 		if (chdir(home) < 0)
-			return (FAIL);
-		return (SUCCESS);
+			return (FAIL_CODE);
+		return (SUCCESS_CODE);
 	}
 	if (_strcmp(data->args[1], "-") == 0)
 	{
@@ -26,22 +26,22 @@ int change_dir(sh_t *data)
 		{
 			SETOWD(data->oldpwd);
 			if (chdir(home) < 0)
-				return (FAIL);
+				return (FAIL_CODE);
 		}
 		else
 		{
 			SETOWD(data->oldpwd);
 			if (chdir(data->oldpwd) < 0)
-				return (FAIL);
+				return (FAIL_CODE);
 		}
 	}
 	else
 	{
 		SETOWD(data->oldpwd);
 		if (chdir(data->args[1]) < 0)
-			return (FAIL);
+			return (FAIL_CODE);
 	}
-	return (SUCCESS);
+	return (SUCCESS_CODE);
 }
 #undef GETCWD
 /**
@@ -49,9 +49,9 @@ int change_dir(sh_t *data)
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * ------- (FAIL_CODE) negative number will returned
  */
-int abort_prg(sh_t *data __attribute__((unused)))
+int abort_prg(shell_info *data __attribute__((unused)))
 {
 	int code, i = 0;
 
@@ -65,7 +65,7 @@ int abort_prg(sh_t *data __attribute__((unused)))
 		if (_isalpha(data->args[1][i++]) < 0)
 		{
 			data->error_msg = _strdup("Illegal number\n");
-			return (FAIL);
+			return (FAIL_CODE);
 		}
 	}
 	code = _atoi(data->args[1]);
@@ -77,9 +77,9 @@ int abort_prg(sh_t *data __attribute__((unused)))
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * ------- (FAIL_CODE) negative number will returned
  */
-int display_help(sh_t *data)
+int display_help(shell_info *data)
 {
 	int fd, fw, rd = 1;
 	char c;
@@ -88,7 +88,7 @@ int display_help(sh_t *data)
 	if (fd < 0)
 	{
 		data->error_msg = _strdup("no help topics match\n");
-		return (FAIL);
+		return (FAIL_CODE);
 	}
 	while (rd > 0)
 	{
@@ -97,22 +97,22 @@ int display_help(sh_t *data)
 		if (fw < 0)
 		{
 			data->error_msg = _strdup("cannot write: permission denied\n");
-			return (FAIL);
+			return (FAIL_CODE);
 		}
 	}
 	PRINT("\n");
-	return (SUCCESS);
+	return (SUCCESS_CODE);
 }
 /**
  * handle_builtin - handle and manage the builtins cmd
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (Fail) negative number will returned
+ * ------- (FAIL_CODE) negative number will returned
  */
-int handle_builtin(sh_t *data)
+int handle_builtin(shell_info *data)
 {
-	blt_t blt[] = {
+	built_in blt[] = {
 		{"exit", abort_prg},
 		{"cd", change_dir},
 		{"help", display_help},
@@ -126,5 +126,5 @@ int handle_builtin(sh_t *data)
 			return ((blt + i)->f(data));
 		i++;
 	}
-	return (FAIL);
+	return (FAIL_CODE);
 }
