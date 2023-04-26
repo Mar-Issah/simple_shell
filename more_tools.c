@@ -72,7 +72,7 @@ int intlen(int num)
  * print_error - prints error
  * @data: the data structure pointer
  *
- * Return: (Success) a positive number
+ * Return: Succes code
  */
 int print_error(shell_info *data)
 {
@@ -92,7 +92,7 @@ int print_error(shell_info *data)
  * write_history - prints error
  * @data: the data structure pointer
  *
- * Return: (Success) a positive number
+ * Return: Succes code
  */
 int write_history(shell_info *data __attribute__((unused)))
 {

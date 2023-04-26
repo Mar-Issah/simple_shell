@@ -56,7 +56,7 @@ char *_memset(char *s, char byt, unsigned int n)
  * free_data - frees data
  * @data: the data structure
  *
- * Return: (Success) positive number
+ * Return: Succes code
  */
 int free_data(shell_info *data)
 {
@@ -64,8 +64,8 @@ int free_data(shell_info *data)
 	data->line = NULL;
 	free(data->args);
 	data->args = NULL;
-	free(data->cmd);
-	data->cmd = NULL;
+	free(data->command);
+	data->command = NULL;
 	free(data->error_msg);
 	data->error_msg = NULL;
 	return (0);

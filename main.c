@@ -3,7 +3,7 @@
 /**
  * main - entry point
  *
- * Return: (Success) 0 always
+ * Return: Succes code
  */
 int main(void)
 {
@@ -14,7 +14,7 @@ int main(void)
 	signal(SIGINT, signal_handler);
 	while (1)
 	{
-		index_cmd(&data);
+		index_command(&data);
 		if (read_command(&data) < 0)
 		{
 			if (isatty(STDIN_FILENO))

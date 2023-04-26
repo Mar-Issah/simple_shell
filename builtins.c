@@ -1,13 +1,12 @@
 #include "shell.h"
 
-#define SETOWD(V) (V = _strdup(_getenv("OLDPWD")))
 /**
- * change_dir - changes directory
- * @data: a pointer to the data structure
+ * change_directory - changes directory
+ * @data: pointer to the data structure
  *
- * Return: (Success) 0 is returned
+ * Return: Succes code
  */
-int change_dir(shell_info *data)
+int change_directory(shell_info *data)
 {
 	char *home;
 
@@ -44,12 +43,12 @@ int change_dir(shell_info *data)
 }
 #undef GETCWD
 /**
- * abort_prg - exit the program
+ * abort_program - exit the program
  * @data: a pointer to the data structure
  *
- * Return: (Success) 0 is returned
+ * Return: Succes code
  */
-int abort_prg(shell_info *data __attribute__((unused)))
+int abort_program(shell_info *data __attribute__((unused)))
 {
 	int code, i = 0;
 
@@ -72,25 +71,25 @@ int abort_prg(shell_info *data __attribute__((unused)))
 }
 
 /**
- * handle_builtin - handle and manage the builtins cmd
+ * handle_builtin - handle and manage the builtins command
  * @data: a pointer to the data structure
  *
- * Return: (Success) 0 is returned
+ * Return: Succes code
  */
 int handle_builtin(shell_info *data)
 {
 	built_in blt[] = {
-		{"exit", abort_prg},
-		{"cd", change_dir},
+		{"exit", abort_program},
+		{"cd", change_directory},
 		{NULL, NULL}
 	};
-	int i = 0;
+	int count = 0;
 
-	while ((blt + i)->cmd)
+	while ((blt + i)->command)
 	{
-		if (_strcmp(data->args[0], (blt + i)->cmd) == 0)
+		if (_strcmp(data->args[0], (blt + i)->command) == 0)
 			return ((blt + i)->f(data));
-		i++;
+		count++;
 	}
 	return (FAIL_CODE);
 }

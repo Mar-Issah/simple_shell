@@ -3,7 +3,7 @@
  * read_command - read a line from the standard input
  * @data: a pointer to the struct of data
  *
- * Return: (Success) a positive number
+ * Return: Succes code
  */
 int read_command(shell_info *data)
 {
@@ -45,7 +45,7 @@ int read_command(shell_info *data)
  * split_command - splits line to tokens
  * @data: a pointer to the struct of data
  *
- * Return: (Success) a positive number
+ * Return: Succes code
  */
 int split_command(shell_info *data)
 {
@@ -83,7 +83,7 @@ int split_command(shell_info *data)
  * parse_command - parses arguments to valid command
  * @data: a pointer to the struct of data
  *
- * Return: (Success) a positive number
+ * Return: Succes code
  */
 int parse_command(shell_info *data)
 {
@@ -103,7 +103,7 @@ int parse_command(shell_info *data)
  * process_command - process command and execute process
  * @data: a pointer to the struct of data
  *
- * Return: (Success) a positive number
+ * Return:Succes code
  */
 int process_command(shell_info *data)
 {
@@ -114,7 +114,7 @@ int process_command(shell_info *data)
 	if (pid == 0)
 	{
 		signal(SIGINT, SIG_DFL);
-		if (execve(data->cmd, data->args, environ) < 0)
+		if (execve(data->command, data->args, environ) < 0)
 		data->error_msg = _strdup("not found\n");
 			return (FAIL_CODE);
 	}

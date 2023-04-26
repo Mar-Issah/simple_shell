@@ -3,7 +3,7 @@
  * _getenv - gets the path
  * @path_name: a pointer to the struct of data
  *
- * Return: (Success) a positive number
+ * Return: Succes code
  */
 char *_getenv(char *path_name)
 {
@@ -83,12 +83,12 @@ void array_rev(char *arr, int len)
 	}
 }
 /**
- * index_cmd - indexed command
+ * index_command - indexed command
  * @data: a pointer to the data structure
  *
  * Return: void
  */
-void index_cmd(shell_info *data)
+void index_command(shell_info *data)
 {
 	data->index += 1;
 }

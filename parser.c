@@ -3,13 +3,13 @@
  * is_path_form - chekc if the given fikenname is a path
  * @data: the data strucct pointer
  *
- * Return: (Success)
+ * Return: Succes code
  */
 int is_path_form(shell_info *data)
 {
 	if (_strchr(data->args[0], '/') != 0)
 	{
-		data->cmd = _strdup(data->args[0]);
+		data->command = _strdup(data->args[0]);
 		return (SUCCESS_CODE);
 	}
 	return (FAIL_CODE);
@@ -19,7 +19,7 @@ int is_path_form(shell_info *data)
  * is_short_form - chekc if the given fikenname is short form
  * @data: the data strucct pointer
  *
- * Return: (Success)
+ * Return: Succes code
  */
 void is_short_form(shell_info *data)
 {
@@ -32,18 +32,18 @@ void is_short_form(shell_info *data)
 	token = strtok(_path, DELIMITER);
 	while (token)
 	{
-		data->cmd = _strcat(token, data->args[0]);
-		if (stat(data->cmd, &st) == 0)
+		data->command = _strcat(token, data->args[0]);
+		if (stat(data->command, &st) == 0)
 		{
 			exist_flag += 1;
 			break;
 		}
-		free(data->cmd);
+		free(data->command);
 		token = strtok(NULL, DELIMITER);
 	}
 	if (exist_flag == 0)
 	{
-		data->cmd = _strdup(data->args[0]);
+		data->command = _strdup(data->args[0]);
 	}
 	free(_path);
 }
@@ -52,20 +52,20 @@ void is_short_form(shell_info *data)
  * is_builtin - checks if the command is builtin
  * @data: a pointer to the data structure
  *
- * Return: (Success) 0 is returned
+ * Return: Succes code
  */
 int is_builtin(shell_info *data)
 {
 	built_in blt[] = {
-		{"exit", abort_prg},
-		{"cd", change_dir},
+		{"exit", abort_program},
+		{"cd", change_directory},
 		{NULL, NULL}
 	};
 	int i = 0;
 
-	while ((blt + i)->cmd)
+	while ((blt + i)->command)
 	{
-		if (_strcmp(data->args[0], (blt + i)->cmd) == 0)
+		if (_strcmp(data->args[0], (blt + i)->command) == 0)
 			return (SUCCESS_CODE);
 		i++;
 	}
