@@ -36,16 +36,12 @@ typedef struct shell_data
 	char *env;
 } shell_info;
 
-typedef struct builtin
-{
-	char *cmd;
-	int (*f)(shell_info *data);
-} built_in;
+
 /* ----------Process prototype------------*/
-int read_line(shell_info *);
-int split_line(shell_info *);
-int parse_line(shell_info *);
-int process_cmd(shell_info *);
+int read_command(shell_info *);
+int split_command(shell_info *);
+int parse_command(shell_info *);
+int process_command(shell_info *);
 
 /* ----------String prototype------------*/
 char *_strdup(char *str);
@@ -53,6 +49,12 @@ char *_strcat(char *first, char *second);
 int _strlen(char *str);
 char *_strchr(char *str, char c);
 int _strcmp(char *s1, char *s2);
+
+typedef struct builtin
+{
+	char *cmd;
+	int (*f)(shell_info *data);
+} built_in;
 
 /* ----------More String prototype-------*/
 char *_strcpy(char *dest, char *source);
@@ -81,7 +83,6 @@ int _isalpha(int c);
 /* -------------Builtins-----------------*/
 int abort_prg(shell_info *data);
 int change_dir(shell_info *data);
-int display_help(shell_info *data);
 int handle_builtin(shell_info *data);
 int check_builtin(shell_info *data);
 

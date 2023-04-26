@@ -6,7 +6,6 @@
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (FAIL_CODE) negative number will returned
  */
 int change_dir(shell_info *data)
 {
@@ -49,7 +48,6 @@ int change_dir(shell_info *data)
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (FAIL_CODE) negative number will returned
  */
 int abort_prg(shell_info *data __attribute__((unused)))
 {
@@ -72,50 +70,18 @@ int abort_prg(shell_info *data __attribute__((unused)))
 	free_data(data);
 	exit(code);
 }
-/**
- * display_help - display the help menu
- * @data: a pointer to the data structure
- *
- * Return: (Success) 0 is returned
- * ------- (FAIL_CODE) negative number will returned
- */
-int display_help(shell_info *data)
-{
-	int fd, fw, rd = 1;
-	char c;
 
-	fd = open(data->args[1], O_RDONLY);
-	if (fd < 0)
-	{
-		data->error_msg = _strdup("no help topics match\n");
-		return (FAIL_CODE);
-	}
-	while (rd > 0)
-	{
-		rd = read(fd, &c, 1);
-		fw = write(STDOUT_FILENO, &c, rd);
-		if (fw < 0)
-		{
-			data->error_msg = _strdup("cannot write: permission denied\n");
-			return (FAIL_CODE);
-		}
-	}
-	PRINT("\n");
-	return (SUCCESS_CODE);
-}
 /**
  * handle_builtin - handle and manage the builtins cmd
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (FAIL_CODE) negative number will returned
  */
 int handle_builtin(shell_info *data)
 {
 	built_in blt[] = {
 		{"exit", abort_prg},
 		{"cd", change_dir},
-		{"help", display_help},
 		{NULL, NULL}
 	};
 	int i = 0;

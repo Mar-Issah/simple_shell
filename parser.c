@@ -4,7 +4,6 @@
  * @data: the data strucct pointer
  *
  * Return: (Success)
- * ------- (FAIL_CODE) otherwise
  */
 int is_path_form(shell_info *data)
 {
@@ -21,7 +20,6 @@ int is_path_form(shell_info *data)
  * @data: the data strucct pointer
  *
  * Return: (Success)
- * ------- (FAIL_CODE) otherwise
  */
 void is_short_form(shell_info *data)
 {
@@ -55,14 +53,12 @@ void is_short_form(shell_info *data)
  * @data: a pointer to the data structure
  *
  * Return: (Success) 0 is returned
- * ------- (FAIL_CODE) negative number will returned
  */
 int is_builtin(shell_info *data)
 {
 	built_in blt[] = {
 		{"exit", abort_prg},
 		{"cd", change_dir},
-		{"help", display_help},
 		{NULL, NULL}
 	};
 	int i = 0;
