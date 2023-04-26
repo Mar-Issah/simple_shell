@@ -108,7 +108,7 @@ int split_command(shell_info *data)
 #define DELIMITER ":"
 /**
  * parse_command - parses arguments
- * @data: a pointer to the struct of data
+ * @input: a pointer to the struct of data
  *
  * Return: Succes code
  */
