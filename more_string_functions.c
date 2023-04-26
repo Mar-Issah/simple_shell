@@ -18,12 +18,12 @@ char *_strcpy(char *dest, char *source)
 	return (dest);
 }
 /**
- * _isalpha - check if the input is a letter
+ * _isalphabet - check if the input is a letter
  * @c: the character to be checked
  *
  * Return: 1 if letter, 0 otherwise
  */
-int _isalpha(int c)
+int _isalphabet(int c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
 	{

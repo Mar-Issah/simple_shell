@@ -4,27 +4,27 @@
  * _realloc - reallocates memory block
  * @ptr: pointer to the previous memory
  * @old_size: the old size
- * @new_size: the new size
+ * @updated_size: the new size
  *
  * Return: a pointer to the newly allocated memory
  */
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_realloc(void *ptr, unsigned int old_size, unsigned int updated_size)
 {
 	void *result;
 
-	if (new_size == old_size)
+	if (updated_size == old_size)
 		return (ptr);
-	if (new_size == 0 && ptr)
+	if (updated_size == 0 && ptr)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	result = malloc(new_size);
+	result = malloc(updated_size);
 	if (result == NULL)
 		return (NULL);
 	if (ptr == NULL)
 	{
-		fill_an_array(result, '\0', new_size);
+		fill_an_array(result, '\0', updated_size);
 		free(ptr);
 	}
 	else

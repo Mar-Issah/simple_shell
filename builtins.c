@@ -43,40 +43,12 @@ int change_directory(shell_info *data)
 }
 #undef GETCWD
 /**
- * abort_program - exit the program
- * @data: a pointer to the data structure
+ * handle_builtin - handle builtin command
+ * @input: pointer to the data struc
  *
  * Return: Succes code
  */
-int abort_program(shell_info *data __attribute__((unused)))
-{
-	int code, i = 0;
-
-	if (data->args[1] == NULL)
-	{
-		free_data(data);
-		exit(errno);
-	}
-	while (data->args[1][i])
-	{
-		if (_isalpha(data->args[1][i++]) < 0)
-		{
-			data->error_msg = _strdup("Illegal number\n");
-			return (FAIL_CODE);
-		}
-	}
-	code = _atoi(data->args[1]);
-	free_data(data);
-	exit(code);
-}
-
-/**
- * handle_builtin - handle and manage the builtins command
- * @data: a pointer to the data structure
- *
- * Return: Succes code
- */
-int handle_builtin(shell_info *data)
+int handle_builtin(shell_info *input)
 {
 	built_in blt[] = {
 		{"exit", abort_program},
@@ -85,11 +57,38 @@ int handle_builtin(shell_info *data)
 	};
 	int count = 0;
 
-	while ((blt + i)->command)
+	while ((blt + count)->command)
 	{
-		if (_strcmp(data->args[0], (blt + i)->command) == 0)
-			return ((blt + i)->f(data));
+		if (_strcmp(input->args[0], (blt + i)->command) == 0)
+			return ((blt + count)->f(data));
 		count++;
 	}
 	return (FAIL_CODE);
 }
+/**
+ * abort_program - abort the program
+ * @data: pointer to the data structure
+ * Return: Succes code
+ */
+int abort_program(shell_info *input __attribute__((unused)))
+{
+	int code, i = 0;
+
+	if (input->args[1] == NULL)
+	{
+		free_data(input);
+		exit(errno);
+	}
+	while (input->args[1][i])
+	{
+		if (_isalphabet(input->args[1][i++]) < 0)
+		{
+			input->error_msg = _strdup("Illegal number\n");
+			return (FAIL_CODE);
+		}
+	}
+	code = _atoi(input->args[1]);
+	free_data(input);
+	exit(code);
+}
+

@@ -1,11 +1,11 @@
 #include "shell.h"
 /**
- * is_path_form - chekc if the given fikenname is a path
+ * is_path_string - chekc if the given fikenname is a path
  * @data: the data strucct pointer
  *
  * Return: Succes code
  */
-int is_path_form(shell_info *data)
+int is_path_string(shell_info *data)
 {
 	if (_strchr(data->args[0], '/') != 0)
 	{
@@ -16,12 +16,12 @@ int is_path_form(shell_info *data)
 }
 #define DELIMITER ":"
 /**
- * is_short_form - chekc if the given fikenname is short form
+ * is_abbreviated - chekc if the given fikenname is short form
  * @data: the data strucct pointer
  *
  * Return: Succes code
  */
-void is_short_form(shell_info *data)
+void is_abbreviated(shell_info *data)
 {
 	char *path, *token, *_path;
 	struct stat st;
@@ -61,13 +61,13 @@ int is_builtin(shell_info *data)
 		{"cd", change_directory},
 		{NULL, NULL}
 	};
-	int i = 0;
+	int count = 0;
 
-	while ((blt + i)->command)
+	while ((blt + count)->command)
 	{
 		if (_strcmp(data->args[0], (blt + i)->command) == 0)
 			return (SUCCESS_CODE);
-		i++;
+		count++;
 	}
 	return (NEUTRAL_CODE);
 }

@@ -58,7 +58,7 @@ typedef struct builtin
 } built_in;
 
 
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size);
+void *_realloc(void *ptr, unsigned int old_size, unsigned int updated_size);
 char *_memset(char *s, char byt, unsigned int n);
 char *_memcpy(char *dest, char *src, unsigned int n);
 int free_data(shell_info *);
@@ -74,10 +74,10 @@ int intlen(int num);
 int _atoi(char *c);
 int print_error(shell_info *data);
 int write_history(shell_info *data);
-int _isalpha(int c);
+int _isalphabet(int c);
 
-int is_path_form(shell_info *data);
-void is_short_form(shell_info *data);
+int is_path_string(shell_info *data);
+void is_abbreviated(shell_info *data);
 int is_builtin(shell_info *data);
 
 int abort_program(shell_info *data);
