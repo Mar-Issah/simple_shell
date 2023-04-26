@@ -67,7 +67,7 @@ int handle_builtin(shell_info *input)
 }
 /**
  * abort_program - abort the program
- * @data: pointer to the data structure
+ * @input: pointer to the data structure
  * Return: Succes code
  */
 int abort_program(shell_info *input __attribute__((unused)))
