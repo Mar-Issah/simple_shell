@@ -13,8 +13,8 @@
 #include <fcntl.h>
 
 #define SUCCESS_CODE (1)
-#define FAIL_CODE_CODE (-1)
-#define NEUTRAL_CODE_CODE (0)
+#define FAIL_CODE (-1)
+#define NEUTRAL_CODE (0)
 
 #define BUFSIZE 256
 #define TOKENSIZE 64
