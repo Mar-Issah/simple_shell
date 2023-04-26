@@ -64,13 +64,13 @@ char *_memcpy(char *dest, char *src, unsigned int n);
 int free_space(shell_info *);
 
 
-void *fill_an_array(void *a, int el, unsigned int len);
+void *populate_array(void *a, int el, unsigned int len);
 void signal_handler(int signo);
 char *_getenv(char *path_name);
 void index_command(shell_info *data);
 void array_rev(char *arr, int len);
 char *_itoa(unsigned int n);
-int intlen(int num);
+int num_digits(int num);
 int _atoi(char *c);
 int print_error(shell_info *data);
 int write_history(shell_info *data);

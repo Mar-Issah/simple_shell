@@ -1,7 +1,21 @@
 #include "shell.h"
 
 /**
- * _strcat - concatenates two string in a path form
+ * _strlen - finds the length of a string
+ * @str: the given string
+ *
+ * Return: Succes code
+ */
+int _strlen(char *str)
+{
+	int len;
+
+	for (len = 0; str[len]; len++)
+		;
+	return (len);
+}
+/**
+ * _strcat - concatenates two string
  * @first: the first given destination
  * @second: the second given source
  *
@@ -27,20 +41,7 @@ char *_strcat(char *first, char *second)
 	result[i] = '\0';
 	return (result);
 }
-/**
- * _strlen - finds the length of a given string
- * @str: the given string
- *
- * Return: Succes code
- */
-int _strlen(char *str)
-{
-	int len;
 
-	for (len = 0; str[len]; len++)
-		;
-	return (len);
-}
 /**
  * _strcmp - compare two strings
  * @s1: the first given string
@@ -50,15 +51,15 @@ int _strlen(char *str)
  */
 int _strcmp(char *s1, char *s2)
 {
-	int cmp = 0, i;
+	int cmp = 0, j;
 
 	if (s1 == NULL || s2 == NULL)
 		return (1);
-	for (i = 0; s1[i]; i++)
+	for (j = 0; s1[j]; j++)
 	{
-		if (s1[i] != s2[i])
+		if (s1[j] != s2[j])
 		{
-			cmp = s1[i] - s2[i];
+			cmp = s1[j] - s2[j];
 			break;
 		}
 		else
@@ -66,24 +67,7 @@ int _strcmp(char *s1, char *s2)
 	}
 	return (cmp);
 }
-/**
- * _strchr - locates a character in a given string
- * @str: the given string
- * @c: the given string
- *
- * Return: Succes code
- */
-char *_strchr(char *str, char c)
-{
-	char *ptr;
 
-	if (str == NULL)
-		return (NULL);
-	for (ptr = str; *ptr; ptr++)
-		if (*ptr == c)
-			return (ptr);
-	return (NULL);
-}
 /**
  * _strdup - dupicates string
  * @str: the given string

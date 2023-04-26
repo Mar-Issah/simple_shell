@@ -24,7 +24,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int updated_size)
 		return (NULL);
 	if (ptr == NULL)
 	{
-		fill_an_array(result, '\0', updated_size);
+		populate_array(result, '\0', updated_size);
 		free(ptr);
 	}
 	else

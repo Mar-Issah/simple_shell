@@ -1,4 +1,19 @@
 #include "shell.h"
+
+/**
+ * signal_handler - handle the process interrept signal
+ * @signo: the signal identifier
+ *
+ * Return: void
+ */
+void signal_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		PRINT("\n");
+		PRINT(PROMPT);
+	}
+}
 /**
  * _getenv - gets the path
  * @path_name: a pointer to the struct of data
@@ -8,8 +23,8 @@
 char *_getenv(char *path_name)
 {
 	char **environ_cursor, *env_ptr, *name_ptr;
-
 	environ_cursor = environ;
+
 	while (*environ_cursor)
 	{
 		env_ptr = *environ_cursor;
@@ -27,31 +42,18 @@ char *_getenv(char *path_name)
 	}
 	return (NULL);
 }
+
 /**
- * signal_handler - handle the process interrept signal
- * @signo: the signal identifier
- *
- * Return: void
- */
-void signal_handler(int signo)
-{
-	if (signo == SIGINT)
-	{
-		PRINT("\n");
-		PRINT(PROMPT);
-	}
-}
-/**
- * fill_an_array - fill an array with elements
- * @a: the given array
+ * populate_array - fill an array with elements
+ * @array: the given array
  * @el: the given element
  * @len: the length of the array
  *
  * Return: pointer to filled array
  */
-void *fill_an_array(void *a, int el, unsigned int len)
+void *populate_array(void *array, int el, unsigned int len)
 {
-	char *p = a;
+	char *p = array;
 	unsigned int i = 0;
 
 	while (i < len)
@@ -60,7 +62,7 @@ void *fill_an_array(void *a, int el, unsigned int len)
 		p++;
 		i++;
 	}
-	return (a);
+	return (array);
 }
 
 /**
@@ -72,14 +74,14 @@ void *fill_an_array(void *a, int el, unsigned int len)
  */
 void array_rev(char *arr, int len)
 {
-	int i;
 	char tmp;
+	int count;
 
-	for (i = 0; i < (len / 2); i++)
+	for (count = 0; count < (len / 2); count++)
 	{
-		tmp = arr[i];
-		arr[i] = arr[(len - 1) - i];
-		arr[(len - 1) - i] = tmp;
+		tmp = arr[count];
+		arr[count] = arr[(len - 1) - count];
+		arr[(len - 1) - count] = tmp;
 	}
 }
 /**
