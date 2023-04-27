@@ -79,6 +79,10 @@ int abort_program(shell_info *input __attribute__((unused)))
 		free_space(input);
 		exit(errno);
 	}
+	if (_strcmp(input->args[0], "exit") == 0){
+		free_space(input);
+		exit(0);
+	}
 	while (input->args[1][i])
 	{
 		if (_isalphabet(input->args[1][i++]) < 0)
